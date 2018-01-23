@@ -1,6 +1,7 @@
 "use strict";
 const express = require("express");
 const ParseServer = require("parse-server").ParseServer;
+const path = require("path");
 
 const app = express();
 
@@ -11,6 +12,7 @@ const api = new ParseServer({
   masterKey: process.env.MASTER_KEY || "myMasterKey"
 });
 
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/parse", api);
 
 app.listen(port, () => {
